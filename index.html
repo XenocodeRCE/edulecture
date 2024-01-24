@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IFrame Navigation</title>
+</head>
+<body>
+  <button onclick="navigate('prev')">Page d'avant</button>
+  <button onclick="navigate('next')">Page d'après</button>
+  <br>
+
+  <iframe id="myFrame" width="100%" height="1000px" src="https://storage.libmanuels.fr/Magnard/specimen/9782210114517/19/OEBPS/page002.xhtml" frameborder="0"></iframe>
+
+  <script>
+    // Base URL for pages
+    var baseUrl = "https://storage.libmanuels.fr/Magnard/specimen/9782210114517/19/OEBPS/page";
+
+    // Total number of pages
+    var totalPages = 512; // Update with the actual total number of pages
+
+    // Initial page index
+    var currentPageIndex = 2; // Update with the initial page index
+
+    // Function to generate page URL
+    function getPageUrl(pageIndex) {
+      var pageNumber = ("00" + pageIndex).slice(-3); // Convert to 3-digit format
+      return baseUrl + pageNumber + ".xhtml";
+    }
+
+    // Function to navigate between pages
+    function navigate(direction) {
+      if (direction === 'prev' && currentPageIndex > 0) {
+        currentPageIndex--;
+      } else if (direction === 'next' && currentPageIndex < totalPages - 1) {
+        currentPageIndex++;
+      }
+
+      // Update iframe source
+      document.getElementById('myFrame').src = getPageUrl(currentPageIndex);
+    }
+  </script>
+</body>
+</html>
